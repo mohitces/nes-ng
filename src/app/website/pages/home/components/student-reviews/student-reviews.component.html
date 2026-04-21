@@ -1,0 +1,61 @@
+<section class="reviews-section container section-padding">
+  <!-- Decorative Background Elements -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-pattern"></div>
+
+  <div class="reviews-content-wrapper">
+    <div class="reviews-header text-center">
+      <h2 class="section-title">{{ reviewData.section_title }}</h2>
+    </div>
+
+  <div class="reviews-layout">
+    <!-- Left Column: Quotes and Navigation -->
+    <div class="reviews-sidebar">
+      <div class="quote-icon">
+        <span class="material-icons">format_quote</span>
+      </div>
+      <h3 class="sidebar-title">What our students are saying</h3>
+      
+      <div class="slider-controls">
+        <button class="nav-btn prev-btn" (click)="slickModal.slickPrev()" aria-label="Previous">
+          <span class="material-icons">west</span>
+        </button>
+        <div class="control-line"></div>
+        <button class="nav-btn next-btn" (click)="slickModal.slickNext()" aria-label="Next">
+          <span class="material-icons">east</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Column: Carousel -->
+    <div class="reviews-carousel">
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+        @for (review of reviewData.reviews; track review.index) {
+          <div ngxSlickItem class="review-slide">
+            
+            <div class="review-bubble">
+              <p class="review-text">"{{ review.review }}"</p>
+              
+              <div class="rating-stars">
+                @for (star of [1,2,3,4,5]; track star) {
+                  <span class="material-icons star">star</span>
+                }
+              </div>
+            </div>
+
+            <div class="reviewer-info">
+              <img [src]="review.avatar" [alt]="review.name" class="reviewer-avatar">
+              <div class="reviewer-meta">
+                <span class="reviewer-name">{{ review.name }}</span>
+                <span class="reviewer-role">NES Student</span>
+              </div>
+            </div>
+
+          </div>
+        }
+      </ngx-slick-carousel>
+    </div>
+  </div>
+  </div>
+</section>

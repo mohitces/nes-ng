@@ -1,0 +1,251 @@
+.reviews-section {
+  background: #fbfbfb;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+
+  // Background Decorative Elements
+  .bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  .shape-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(40, 167, 69, 0.1); 
+    top: -100px;
+    left: -100px;
+  }
+
+  .shape-2 {
+    width: 500px;
+    height: 500px;
+    background: rgba(0, 86, 210, 0.08); 
+    bottom: -150px;
+    right: -150px;
+  }
+
+  .bg-pattern {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 250px;
+    height: 250px;
+    background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .reviews-content-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--nes-dark);
+    margin-bottom: 3rem;
+  }
+
+  .reviews-layout {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+
+    .reviews-sidebar {
+      width: 250px;
+      flex-shrink: 0;
+
+      .quote-icon {
+        .material-icons {
+          font-size: 6rem;
+          color: #cbd5e1;
+          transform: scaleX(-1); // To make it point differently if needed
+        }
+      }
+
+      .sidebar-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--nes-dark);
+        line-height: 1.25;
+        margin: 1rem 0 2rem;
+      }
+
+      .slider-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .nav-btn {
+          background: none;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          color: var(--nes-dark);
+          transition: all 0.3s ease;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .material-icons {
+            font-size: 1.8rem;
+          }
+
+          &:hover {
+            color: var(--nes-green);
+          }
+        }
+
+        .control-line {
+          width: 50px;
+          height: 2px;
+          background: var(--nes-dark);
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .reviews-carousel {
+       flex: 1;
+       min-width: 0;
+
+       .review-slide {
+         padding: 1rem;
+         outline: none;
+       }
+    }
+  }
+
+  // Speech Bubble Design
+  .review-bubble {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border-bottom-left-radius: 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    position: relative;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 320px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-top: 15px solid white;
+      border-right: 15px solid transparent;
+      filter: drop-shadow(2px 5px 3px rgba(0,0,0,0.02));
+    }
+
+    .review-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #475569;
+      margin-bottom: 1.5rem;
+      flex: 1;
+      overflow-y: auto; // Allow scroll if long
+      
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #e2e8f0;
+        border-radius: 4px;
+      }
+    }
+
+    .rating-stars {
+      display: flex;
+      gap: 0.2rem;
+      margin-top: auto;
+      padding-top: 1rem;
+
+      .star {
+        font-size: 1.1rem;
+        color: var(--nes-green); // Using the green they requested instead of standard gold/yellow
+      }
+    }
+  }
+
+  .reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-left: 1.5rem;
+
+    .reviewer-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border: 2px solid white;
+    }
+
+    .reviewer-meta {
+      display: flex;
+      flex-direction: column;
+
+      .reviewer-name {
+        font-weight: 700;
+        color: var(--nes-dark);
+        font-size: 0.95rem;
+      }
+
+      .reviewer-role {
+        font-size: 0.8rem;
+        color: var(--nes-text-muted);
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .reviews-section .reviews-layout {
+    flex-direction: column;
+    gap: 2rem;
+
+    .reviews-sidebar {
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .slider-controls {
+        justify-content: center;
+        margin-top: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .reviews-section {
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .review-bubble {
+        height: auto;
+        min-height: 250px;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
+import { WebsiteRoutingModule } from './website-routing.module';
+import { HomeComponent } from './pages/home/home.component';
+import { HomeCarouselComponent } from './pages/home/components/home-carousel/home-carousel.component';
+import { ExploreCoursesComponent } from './pages/home/components/explore-courses/explore-courses.component';
+import { StudentReviewsComponent } from './pages/home/components/student-reviews/student-reviews.component';
+import { PlacementCompaniesComponent } from './pages/home/components/placement-companies/placement-companies.component';
+import { RecentPlacementsComponent } from './pages/home/components/recent-placements/recent-placements.component';
+
+
+@NgModule({
+  declarations: [
+    HomeComponent,
+    HomeCarouselComponent,
+    ExploreCoursesComponent,
+    StudentReviewsComponent,
+    PlacementCompaniesComponent,
+    RecentPlacementsComponent
+  ],
+  imports: [
+    CommonModule,
+    WebsiteRoutingModule,
+    SlickCarouselModule
+  ]
+})
+export class WebsiteModule { }

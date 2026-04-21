@@ -1,0 +1,18 @@
+<div class="hero-carousel-wrapper">
+  <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+      <a *ngIf="slide.link" [href]="slide.link" target="_blank">
+        <img [src]="slide.url" [alt]="'Slide ' + slide.index" class="slide-img">
+      </a>
+      <img *ngIf="!slide.link" [src]="slide.url" [alt]="'Slide ' + slide.index" class="slide-img">
+    </div>
+  </ngx-slick-carousel>
+
+  <!-- Custom Navigation Buttons -->
+  <button class="custom-nav custom-prev" aria-label="Previous slide">
+    <i class="material-icons">chevron_left</i>
+  </button>
+  <button class="custom-nav custom-next" aria-label="Next slide">
+    <i class="material-icons">chevron_right</i>
+  </button>
+</div>

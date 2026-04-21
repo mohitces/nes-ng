@@ -1,0 +1,117 @@
+<header class="header">
+  <!-- Top Bar: Green -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="contact-info">
+        <a href="tel:+919582801239" class="contact-item">
+          <i class="material-icons">phone</i>
+          <span>Call us for help +91-9582-801-239</span>
+        </a>
+        <a href="#" class="contact-item">Request a Callback</a>
+        <a href="mailto:info@nexpertsolutions.com" class="contact-item">
+          <i class="material-icons">mail</i>
+          <span>info&#64;nexpertsolutions.com</span>
+        </a>
+      </div>
+      <div class="top-actions">
+        <button class="btn-pay">
+          <i class="material-icons ribbon">payments</i>
+          <span>Pay Online</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation: White -->
+  <nav class="main-nav">
+    <div class="container nav-content">
+      <div class="logo">
+        <img src="../../../../assets/images/logo.png" alt="NES Logo" class="logo-img"
+          onerror="this.src='https://via.placeholder.com/150x50?text=NES+LOGO'">
+      </div>
+
+      <div class="search-container">
+        <div class="search-bar">
+          <input type="text" placeholder="What do you want to learn?">
+          <button class="search-btn">
+            <i class="material-icons">search</i>
+          </button>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        @for (item of menuData; track item.label) {
+        <li class="nav-item" [class.has-dropdown]="item.children && item.children.length > 0">
+          <a [href]="item.url" class="nav-link">
+            {{ item.label }}
+            @if (item.children && item.children.length > 0) {
+            <i class="material-icons">expand_more</i>
+            }
+          </a>
+
+          @if (item.children && item.children.length > 0) {
+          <div class="dropdown-container" [class.mega-menu]="item.label === 'All Courses'">
+            <div class="dropdown-content">
+              @if (item.label === 'All Courses') {
+              <!-- SIDEBAR STYLE MEGA MENU -->
+              <div class="mega-sidemenu-layout">
+                <!-- Left Sidebar -->
+                <aside class="mega-sidebar">
+                  @for (cat of item.children; track cat.label) {
+                  <div class="sidebar-item" [class.active]="activeCategory === cat.label"
+                    (mouseenter)="setActiveCategory(cat.label)">
+                    <span class="material-icons sidebar-icon">
+                      @if (cat.label === 'CISCO') { router }
+                      @else if (cat.label === 'CHECKPOINT') { security }
+                      @else if (cat.label === 'MICROSOFT') { desktop_windows }
+                      @else if (cat.label === 'JUNIPER') { lan }
+                      @else if (cat.label === 'VMware') { layers }
+                      @else if (cat.label === 'COMPTIA') { school }
+                      @else if (cat.label === 'CLOUD') { cloud }
+                      @else if (cat.label === 'F5') { dns }
+                      @else if (cat.label === 'REDHAT-LINUX') { terminal }
+                      @else if (cat.label === 'PALO-ALTO') { shield }
+                      @else { star }
+                    </span>
+                    <span class="sidebar-label">{{ cat.label }}</span>
+                    <i class="material-icons arrow">chevron_right</i>
+                  </div>
+                  }
+                </aside>
+
+                <!-- Right Content Area -->
+                <main class="mega-main-content">
+                  <div class="content-header">
+                    <h2 class="category-heading">{{ activeCategory }}</h2>
+                    <a [href]="activeCategoryData?.url" class="btn-show-all">
+                      Show all products <i class="material-icons">arrow_forward</i>
+                    </a>
+                  </div>
+
+                  <div class="content-grid">
+                    @for (course of activeCategoryData?.children; track course.label) {
+                    <div class="course-col">
+                      <a [href]="course.url" class="course-link">{{ course.label }}</a>
+                    </div>
+                    }
+                  </div>
+                </main>
+              </div>
+              } @else {
+              <!-- Standard Dropdown for other items -->
+              <ul class="standard-list">
+                @for (subItem of item.children; track subItem.label) {
+                <li><a [href]="subItem.url">{{ subItem.label }}</a></li>
+                }
+              </ul>
+              }
+            </div>
+          </div>
+          }
+        </li>
+        }
+      </ul>
+
+    </div>
+  </nav>
+</header>

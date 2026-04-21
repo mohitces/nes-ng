@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+/* Slick Carousel Styles */
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+:root {
+  --nes-green: #28a745;
+  --nes-green-dark: #218838;
+  --nes-dark: #1a1a1a;
+  --nes-light: #ffffff;
+  --nes-text-main: #333333;
+  --nes-text-muted: #666666;
+  --nes-border: #e0e0e0;
+  --nes-search-bg: #f3f4f6;
+
+  --primary-color: var(--nes-green);
+  --primary-hover: var(--nes-green-dark);
+  --bg-color: #ffffff;
+  --surface-color: var(--nes-light);
+  --text-color: var(--nes-text-main);
+  --text-muted: var(--nes-text-muted);
+  --border-color: var(--nes-border);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.main-content {
+  min-height: calc(100vh - 160px);
+  /* Adjust based on header/footer height */
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.section-padding {
+  padding: 2.5rem 2.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+.slick-slide {
+
+  height: 450px;
+  overflow: hidden;
+  object-fit: cover;
+}

@@ -1,0 +1,50 @@
+<section class="placement-section section-padding">
+  <div class="container text-center">
+    <h2 class="section-title">{{ data.section_title }}</h2>
+    <p class="section-tagline">{{ data.tagline }}</p>
+  </div>
+
+  <div class="scrolling-stage">
+    <!-- Row 1: Left to Right -->
+    <div class="marquee-row">
+      <div class="marquee-content marquee-left">
+        @for (img of row1; track $index) {
+          <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
+        }
+      </div>
+      <div class="marquee-content marquee-left" aria-hidden="true">
+        @for (img of row1; track $index) {
+          <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
+        }
+      </div>
+    </div>
+
+    <!-- Row 2: Right to Left -->
+    <div class="marquee-row">
+      <div class="marquee-content marquee-right">
+        @for (img of row2; track $index) {
+          <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
+        }
+      </div>
+      <div class="marquee-content marquee-right" aria-hidden="true">
+        @for (img of row2; track $index) {
+          <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
+        }
+      </div>
+    </div>
+
+    <!-- Row 3: Left to Right -->
+    <div class="marquee-row">
+      <div class="marquee-content marquee-left" style="animation-duration: 90s;">
+        @for (img of row3; track $index) {
+          <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
+        }
+      </div>
+      <div class="marquee-content marquee-left" aria-hidden="true" style="animation-duration: 90s;">
+        @for (img of row3; track $index) {
+          <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

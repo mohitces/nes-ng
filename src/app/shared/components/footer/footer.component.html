@@ -1,0 +1,111 @@
+<footer class="footer">
+  <div class="footer-container">
+    
+    <div class="footer-top-grid">
+      <!-- Mega Sections (Trending Courses) -->
+      <div class="footer-col full-width-col">
+        <h3 class="footer-title">{{ footerData.trending_courses.title }}</h3>
+        <ul class="multi-column-list">
+          @for (link of footerData.trending_courses.links; track $index) {
+            <li><a [href]="link.url">{{ link.label }}</a></li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <!-- Main Grid -->
+    <div class="footer-grid">
+      
+      <!-- Company Info Box -->
+      <div class="footer-col brand-col">
+        <div class="logo-box">
+          <h2>NET EXPERT SOLUTIONS</h2>
+        </div>
+        <div class="contact-details">
+          <div class="contact-row">
+            <i class="material-icons">location_on</i>
+            <p>{{ footerData.company_info.address }}</p>
+          </div>
+          <div class="contact-row">
+            <i class="material-icons">email</i>
+            <p><a href="mailto:{{ footerData.company_info.email }}">{{ footerData.company_info.email }}</a></p>
+          </div>
+          <div class="contact-row align-top">
+            <i class="material-icons">call</i>
+            <div class="phones">
+              @for (phone of footerData.company_info.phones; track $index) {
+                <span>{{ phone }}</span>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="hr-contact">
+          <h4>{{ footerData.hr_contact.label }}</h4>
+          <p><strong>{{ footerData.hr_contact.contact_person }}</strong> - <a href="mailto:{{ footerData.hr_contact.email }}">{{ footerData.hr_contact.email }}</a></p>
+        </div>
+      </div>
+
+      <!-- Right Side Grid Links -->
+      <div class="links-mega-grid">
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h3 class="footer-title">{{ footerData.quick_links.title }}</h3>
+          <ul class="regular-list">
+            @for (link of footerData.quick_links.links; track $index) {
+              <li><i class="material-icons">chevron_right</i> <a [href]="link.url">{{ link.label }}</a></li>
+            }
+          </ul>
+        </div>
+
+        <!-- Job Guarantee -->
+        <div class="footer-col">
+          <h3 class="footer-title">{{ footerData.job_guarantee_programs.title }}</h3>
+          <ul class="regular-list highlight-list">
+            @for (link of footerData.job_guarantee_programs.links; track $index) {
+              <li><i class="material-icons">check_circle</i> <a [href]="link.url">{{ link.label }}</a></li>
+            }
+          </ul>
+        </div>
+
+        <!-- Popular Courses -->
+        <div class="footer-col">
+          <h3 class="footer-title">{{ footerData.popular_courses.title }}</h3>
+          <ul class="regular-list">
+            @for (link of footerData.popular_courses.links; track $index) {
+              <li><i class="material-icons">star_rate</i> <a [href]="link.url">{{ link.label }}</a></li>
+            }
+          </ul>
+        </div>
+        
+        <!-- Vendors -->
+        <div class="footer-col">
+          <h3 class="footer-title">{{ footerData.vendors.title }}</h3>
+          <ul class="regular-list tags-list">
+            @for (link of footerData.vendors.links; track $index) {
+              <li><a [href]="link.url">{{ link.label }}</a></li>
+            }
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Footer -->
+    <div class="footer-bottom">
+      <p class="copyright">{{ footerData.copyright }}</p>
+      <div class="policy-links">
+        @for (link of footerData.policies.links; track $index) {
+          <a [href]="link.url">{{ link.label }}</a>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <a [href]="footerData.whatsapp.url" target="_blank" class="floating-whatsapp" [title]="footerData.whatsapp.label">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+</footer>

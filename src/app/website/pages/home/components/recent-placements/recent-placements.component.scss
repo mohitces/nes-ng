@@ -1,0 +1,78 @@
+.placements-section {
+  background: #fbfbfb;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  overflow: hidden; 
+  padding: 4rem 0;
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--nes-dark);
+    margin-bottom: 3.5rem;
+  }
+
+  .scrolling-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .marquee-row {
+    display: flex;
+    overflow: hidden;
+    gap: 1.2rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    &:hover .marquee-content {
+      animation-play-state: paused;
+    }
+  }
+
+  .marquee-content {
+    display: flex;
+    flex-shrink: 0;
+    gap: 1.2rem;
+    min-width: 100%; 
+  }
+
+  .placement-card {
+    background: white;
+    border-radius: 8px;
+    flex-shrink: 0;
+    width: 280px;
+    height: auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden; // mask edges for rounded effect
+
+    &:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // Fill the container while maintaining aspect ratio, cropping if needed
+    }
+  }
+
+  .marquee-left {
+    animation: scroll-l 100s linear infinite; 
+  }
+
+  @keyframes scroll-l {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-100% - 1.2rem)); } 
+  }
+}

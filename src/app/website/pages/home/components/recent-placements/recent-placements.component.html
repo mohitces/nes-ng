@@ -1,0 +1,51 @@
+<section class="placements-section section-padding">
+  <div class="container text-center">
+    <h2 class="section-title">{{ data.section_title }}</h2>
+  </div>
+
+  <div class="scrolling-stage">
+    
+    <!-- Row 1: Right to Left -->
+    <div class="marquee-row">
+      <div class="marquee-content marquee-left" style="animation-duration: 120s;">
+        @for (img of row1; track $index) {
+          <div class="placement-card"><img [src]="img.url" alt="Placed Candidate"></div>
+        }
+      </div>
+      <div class="marquee-content marquee-left" aria-hidden="true" style="animation-duration: 120s;">
+        @for (img of row1; track $index) {
+          <div class="placement-card"><img [src]="img.url" alt="Placed Candidate"></div>
+        }
+      </div>
+    </div>
+
+    <!-- Row 2: Right to Left (off-set pace) -->
+    <div class="marquee-row">
+      <div class="marquee-content marquee-left" style="animation-duration: 100s;">
+        @for (img of row2; track $index) {
+          <div class="placement-card"><img [src]="img.url" alt="Placed Candidate"></div>
+        }
+      </div>
+      <div class="marquee-content marquee-left" aria-hidden="true" style="animation-duration: 100s;">
+        @for (img of row2; track $index) {
+          <div class="placement-card"><img [src]="img.url" alt="Placed Candidate"></div>
+        }
+      </div>
+    </div>
+
+    <!-- Row 3: Right to Left (different pace) -->
+    <div class="marquee-row">
+      <div class="marquee-content marquee-left" style="animation-duration: 110s;">
+        @for (img of row3; track $index) {
+          <div class="placement-card"><img [src]="img.url" alt="Placed Candidate"></div>
+        }
+      </div>
+      <div class="marquee-content marquee-left" aria-hidden="true" style="animation-duration: 110s;">
+        @for (img of row3; track $index) {
+          <div class="placement-card"><img [src]="img.url" alt="Placed Candidate"></div>
+        }
+      </div>
+    </div>
+
+  </div>
+</section>
