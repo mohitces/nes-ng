@@ -1,0 +1,125 @@
+<section class="course-page" *ngIf="course">
+  <header class="course-hero" [style.background-image]="'url(' + bannerImage + ')'">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <div class="course-tags">
+          @for (tag of heroTags; track tag) {
+          <span>{{ tag }}</span>
+          }
+        </div>
+
+        <h1>{{ headline }}</h1>
+
+        <div class="hero-meta" aria-label="Course information">
+          <span><span class="material-icons">calendar_today</span>{{ course.hours || 'To be updated' }} Hours</span>
+          <span><span class="material-icons">double_arrow</span>{{ course.training_mode }}</span>
+          <span><span class="material-icons">person_outline</span>{{ studentCount }} Student Enrolled</span>
+        </div>
+
+        <p class="hero-summary">{{ course.source_summary }}</p>
+
+        @if (course.page_sections?.guidance_quote) {
+        <p class="guidance">"{{ course.page_sections?.guidance_quote }}"</p>
+        }
+
+        <div class="hero-rating">
+          <span class="stars" aria-label="Course rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+          <span>{{ ratingText }}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container course-shell">
+    <main class="course-content">
+      <nav class="section-tabs" aria-label="Course sections">
+        @for (section of contentSections.slice(0, 6); track section.title) {
+        <a [href]="'#' + toSlug(section.title)">{{ section.title }}</a>
+        }
+      </nav>
+
+      @for (section of contentSections; track section.title) {
+      <section class="content-card" [id]="toSlug(section.title)">
+        <h2>{{ section.title }}</h2>
+
+        @if (section.paragraphs?.length) {
+        <div class="copy-block">
+          @for (paragraph of section.paragraphs; track paragraph) {
+          <p>{{ paragraph }}</p>
+          }
+        </div>
+        }
+
+        @if (section.items?.length) {
+        <ul class="arrow-list">
+          @for (item of section.items; track item) {
+          <li>{{ item }}</li>
+          }
+        </ul>
+        }
+
+        @if (section.accordion?.length) {
+        <div class="accordion-list">
+          @for (item of section.accordion; track item) {
+          <details>
+            <summary>{{ item }}</summary>
+            <p>Details for this item can be managed from the dashboard.</p>
+          </details>
+          }
+        </div>
+        }
+      </section>
+      }
+    </main>
+
+    <aside class="course-sidebar" aria-label="Course payment and enquiry">
+      <div class="payment-card">
+        <img [src]="course.image" [alt]="pageTitle">
+
+        <div class="info-table">
+          @for (row of sidebarRows; track row.label) {
+          <div class="info-row" [class.featured]="row.label === 'Training Duration'">
+            <span>{{ row.label }}</span>
+            @if (row.isContact) {
+            <a class="contact-btn" href="https://wa.me/919582801239" target="_blank" rel="noopener">
+              <span class="material-icons">chat</span>
+              Contact Coordinator
+            </a>
+            } @else {
+            <strong>{{ row.value }}</strong>
+            }
+          </div>
+          }
+        </div>
+
+        <a class="touch-btn" [href]="course.buy_url" target="_blank" rel="noopener">Get IN Touch</a>
+
+        <form class="enquiry-form">
+          <h3>Enquiry Now</h3>
+          <p>Call- +91-9582-801-239</p>
+          <input type="text" name="name" placeholder="Name" aria-label="Name">
+          <input type="tel" name="phone" placeholder="Phone Number" aria-label="Phone Number">
+          <input type="email" name="email" placeholder="Email Address" aria-label="Email Address">
+          <select name="course" aria-label="Select Course">
+            <option value="">Select Course-</option>
+            @for (courseName of enquiryCourses; track courseName) {
+            <option [value]="courseName">{{ courseName }}</option>
+            }
+          </select>
+          <textarea name="message" rows="4" placeholder="Message" aria-label="Message"></textarea>
+          <button type="button">Send</button>
+        </form>
+      </div>
+    </aside>
+  </div>
+
+  <a class="whatsapp-float" href="https://wa.me/919582801239" target="_blank" rel="noopener">
+    <span class="material-icons">chat</span>
+    Chat with us on WhatsApp
+  </a>
+
+  <a class="help-float" href="https://wa.me/919582801239" target="_blank" rel="noopener">
+    <span class="material-icons">help_outline</span>
+    Help
+  </a>
+</section>

@@ -1,10 +1,149 @@
-<app-home-carousel></app-home-carousel>
+<section class="landing-video" aria-label="Landing video">
+  <video
+    class="landing-video__media"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  >
+    <source src="assets/video/landing page video.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+  <div class="landing-video__overlay"></div>
+  <div class="landing-video__content">
+    <h1>Build Your Future in Networking, Cloud, and Cyber Security with NES</h1>
+    <p>Nexpert Solutions helps you gain job-ready skills through expert-led training, real lab practice, and industry-focused learning paths designed for career growth.</p>
+    <a class="landing-video__cta" href="#">
+      Start Learning with NES
+      <span aria-hidden="true">&nbsp;&#8599;</span>
+    </a>
+  </div>
+</section>
+
+<!-- <app-home-carousel></app-home-carousel> -->
 
 <app-explore-courses></app-explore-courses>
 
+<section class="learn-skills section-padding">
+  <div class="container learn-skills-wrap">
+    <div class="skills-copy">
+      <h2>Meet Our <span class="placed-highlight">Recently Placed</span> Students</h2>
+      <p> NES learners turned hands-on training into real career outcomes and are now working in leading technology companies.</p>
+    </div>
+
+    <div class="skills-carousel-wrap">
+      <div class="skills-cards" #skillsScroller (scroll)="updateSlideState()">
+        @for (card of skillCards; track card.name + $index) {
+        <a href="#" class="skill-card">
+          <img [src]="card.image" [alt]="card.name">
+          <div class="skill-caption">
+            <div class="candidate-info">
+              <span class="skill-title">{{ card.name }}</span>
+              <span class="designation">{{ card.designation }}</span>
+            </div>
+            <img class="company-logo" [src]="card.logo" [alt]="card.company + ' logo'">
+          </div>
+        </a>
+        }
+      </div>
+    </div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn" type="button" (click)="scrollSkills('left')">&#8592;</button>
+      <div class="dots">
+        @for (dot of [].constructor(totalSlides || 4); track $index) {
+        <span class="dot" [class.active]="$index === currentSlide"></span>
+        }
+      </div>
+      <button class="carousel-btn" type="button" (click)="scrollSkills('right')">&#8594;</button>
+    </div>
+  </div>
+</section>
+
 <app-placement-companies></app-placement-companies>
 
+<section class="latest-blogs section-padding">
+  <div class="container">
+    <div class="blogs-head">
+      <h2><a [routerLink]="['/blogs']">Latest <span>Blogs</span> From NES</a></h2>
+      <p>Insights, certification strategies, and practical guides from networking, cloud, and security experts.</p>
+    </div>
+
+    <div class="blogs-grid">
+      @for (blog of blogCards; track blog.title) {
+      <article class="blog-card" [routerLink]="['/blogs']">
+        <div class="blog-image-wrap">
+          <img [src]="blog.image" [alt]="blog.title">
+          <span class="blog-tag">{{ blog.tag }}</span>
+        </div>
+        <div class="blog-content">
+          <h3>{{ blog.title }}</h3>
+          <p>{{ blog.excerpt }}</p>
+        </div>
+      </article>
+      }
+    </div>
+  </div>
+</section>
 
 <app-student-reviews></app-student-reviews>
 
-<app-recent-placements></app-recent-placements>
+<!-- <app-recent-placements></app-recent-placements> -->
+
+<section class="modern-learning section-padding">
+  <div class="container">
+    <div class="modern-head">
+      <h2>Modern skills need a modern learning approach</h2>
+      <p>
+        Learning solutions shouldn’t be one-size-fits-all. For effective training, you need the right skills and the
+        right modalities. That’s where we come in.
+      </p>
+    </div>
+
+    <div class="modern-card">
+      <div class="modern-hero">
+        <img src="assets/images/banners/single image banner 2.png" alt="Learning platform preview">
+      </div>
+
+      <div class="modern-grid">
+        <div class="modern-item">
+          <span class="item-icon">&#8599;</span>
+          <h3>On-Demand Learning</h3>
+          <p>Provide anytime access to the latest business, tech, leadership, and soft skills courses all in one learning platform.</p>
+        </div>
+        <div class="modern-item">
+          <span class="item-icon">&#8599;</span>
+          <h3>Hands-On Learning</h3>
+          <p>Boost tech skills faster with learn-by-doing projects and expert-guided practice environments.</p>
+        </div>
+        <div class="modern-item">
+          <span class="item-icon">&#8599;</span>
+          <h3>Cohort Learning</h3>
+          <p>Grow your teams with guided, self-paced programs and peer collaboration that keeps momentum high.</p>
+        </div>
+        <div class="modern-item">
+          <span class="item-icon">&#8599;</span>
+          <h3>Professional Services</h3>
+          <p>Get the expertise and support you need to achieve your goals faster with tailored enablement plans.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="org-impact">
+  <img class="float-img top-left" src="assets/images/people images ai generated/1.png" alt="Learner">
+  <img class="float-img mid-left" src="assets/images/people images ai generated/2.png" alt="Learner">
+  <img class="float-img top-right" src="assets/images/people images ai generated/3.png" alt="Learner">
+  <img class="float-img mid-right" src="assets/images/people images ai generated/4.png" alt="Learner">
+  <img class="float-img bottom-left" src="assets/images/people images ai generated/5.png" alt="Learner">
+  <img class="float-img bottom-right" src="assets/images/people images ai generated/6.png" alt="Learner">
+
+  <div class="org-content">
+    <h2>What will learning do for you?</h2>
+    <p>See the impact of valuable and top-of-the-market learning. Let’s start on a plan that supports your goals.</p>
+    <a href="#" class="demo-btn">Request a demo</a>
+    <p class="small-team">Want to become an achiever? <a href="#">Start with a course.</a></p>
+  </div>
+</section>

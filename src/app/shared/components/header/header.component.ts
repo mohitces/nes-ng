@@ -148,16 +148,9 @@ export class HeaderComponent {
       "children": []
     },
     {
-      "label": "100% JOB Guarantee",
-      "url": "#",
-      "children": [
-        { "label": "NES Certified Network Expert (NCNE)", "url": "https://www.nexpertsolutions.com/job-guarantee-courses/ncne-master-program" },
-        { "label": "Integrated CCIE Enterprise", "url": "https://www.nexpertsolutions.com/job-guarantee-courses/ccna-to-ccie-enterprise" },
-        { "label": "Integrated CCIE Security", "url": "https://www.nexpertsolutions.com/job-guarantee-courses/ccna-to-ccie-security" },
-        { "label": "Multi Vendor Firewall", "url": "https://www.nexpertsolutions.com/job-guarantee-courses/multi-vendor-firewall" },
-        { "label": "Multi Vendor Cloud", "url": "https://www.nexpertsolutions.com/job-guarantee-courses/multi-vendor-cloud" },
-        { "label": "Master Program In Security", "url": "https://www.nexpertsolutions.com/job-guarantee-courses/master-program-in-security-online-course" }
-      ]
+      "label": "One-Stop Course",
+      "url": "https://www.nexpertsolutions.com/job-guarantee-courses/ncne-master-program",
+      "children": []
     },
     {
       "label": "Video Portal",
@@ -166,7 +159,7 @@ export class HeaderComponent {
     },
     {
       "label": "Blogs",
-      "url": "https://www.nexpertsolutions.com/blogs",
+      "url": "/blogs",
       "children": []
     },
     {
@@ -186,5 +179,9 @@ export class HeaderComponent {
 
   setActiveCategory(label: string) {
     this.activeCategory = label;
+  }
+
+  toSlug(value: string): string {
+    return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   }
 }

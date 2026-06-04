@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-footer',
@@ -6,10 +7,27 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
+  officeAddress = '4th Floor Bhagwan Sahay Complex, Sector-15 Noida-201301 Uttar Pradesh, Landmark: Opposite Metro Pillar No. 30, Above Central Bank';
+  mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=4th%20Floor%20Bhagwan%20Sahay%20Complex%2C%20Sector-15%20Noida-201301%20Uttar%20Pradesh';
+  mapEmbedUrl = 'https://maps.google.com/maps?q=4th%20Floor%20Bhagwan%20Sahay%20Complex%2C%20Sector-15%20Noida-201301%20Uttar%20Pradesh&z=15&output=embed';
+  safeMapEmbedUrl: SafeResourceUrl;
+  copied = false;
+
+  constructor(private sanitizer: DomSanitizer) {
+    this.safeMapEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.mapEmbedUrl);
+  }
+
+  copyAddress() {
+    navigator.clipboard.writeText(this.officeAddress).then(() => {
+      this.copied = true;
+      setTimeout(() => (this.copied = false), 1800);
+    });
+  }
+
   footerData = {
     "section_title": "Footer",
     "company_info": {
-      "address": "4th Floor Bhagwan Sahay Complex, Sector-15 Noida-201301 Uttar Pradesh, Landmark: Opposite Metro Pillar No. 30, Above Central Bank",
+      "address": this.officeAddress,
       "email": "info@nexpertsolutions.com",
       "phones": [
         "+91-9582-801-239",

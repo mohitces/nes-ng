@@ -1,5 +1,4 @@
 <section class="explore-section container section-padding">
-  <!-- Destination Banner -->
   <div class="destination-banner">
     <div class="banner-intro">
       <h3 class="dest-title">{{ destinationData.section_title }}</h3>
@@ -19,6 +18,7 @@
 
   <div class="section-header">
     <h2 class="section-title">Explore categories</h2>
+    <p class="section-subline">Choose your track and start with industry-focused training paths.</p>
   </div>
 
   <div class="categories-grid">
@@ -35,70 +35,46 @@
     }
   </div>
 
-  <div class="featured-courses-layout">
-    <!-- Blue Feature Box -->
-    <div class="feature-banner">
-      <div class="banner-content">
-        <h3 class="banner-title">Our Top Courses</h3>
-        <p class="banner-text">Master the most in-demand skills in Networking, Security, and Cloud.</p>
-        <a href="#" class="btn-explore">
-          Explore courses
-          <span class="material-icons">arrow_forward</span>
-        </a>
-      </div>
+  <div class="single-banner-only">
+    <img src="assets/images/banners/single image banner.png" alt="Mentorship banner">
+  </div>
+
+  <div class="top-courses-block">
+    <div class="top-courses-head">
+      <h3>Our Top Courses</h3>
+      <p>Master the most in-demand skills in Networking, Security, and Cloud.</p>
     </div>
 
-    <!-- Courses Slider -->
-    <div class="courses-carousel-wrapper">
-      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-        @for (course of topCourses; track course.index) {
-        <div ngxSlickItem class="course-slide">
-          <div class="course-card">
-            <div class="card-image">
-              <img [src]="course.image" [alt]="course.title">
-            </div>
-            <div class="card-content">
-              <div class="provider-info">
-                <span class="provider-name">Nexpert Solutions</span>
-              </div>
-              <h4 class="course-title">{{ course.title }}</h4>
-              <p class="course-type">Professional Training</p>
-
-              <div class="modules-list">
-                @for (mod of course.modules.slice(0, 3); track mod) {
-                <span class="module-tag">{{ mod }}</span>
-                }
-                @if (course.modules.length > 3) {
-                <span class="module-tag more">+{{ course.modules.length - 3 }} more</span>
-                }
-              </div>
-
-              <div class="course-meta">
-                <div class="rating">
-                  <span class="rating-value">4.9</span>
-                  <span class="material-icons">star</span>
-                  <span class="reviews-count">({{ course.reviews | number }})</span>
-                </div>
-                <div class="duration">
-                  <span class="material-icons">schedule</span>
-                  <span>{{ course.hours }}h</span>
-                </div>
-              </div>
-
-              <div class="price-section">
-                <div class="prices">
-                  <span class="discounted-price">{{ course.price.discounted }}</span>
-                  <span class="original-price">{{ course.price.original }}</span>
-                </div>
-                <span class="discount-badge">{{ course.price.discount_percent }}% OFF</span>
-              </div>
-
-              <a [href]="course.url" class="btn-view-details">View Course</a>
-            </div>
-          </div>
+    <div class="courses-grid-wrapper">
+      @for (course of topCourses.slice(0, 8); track course.index) {
+      <div class="course-card">
+        <div class="card-image">
+          <a [routerLink]="['/course', toSlug(course.title)]"><img [src]="course.image" [alt]="course.title"></a>
         </div>
-        }
-      </ngx-slick-carousel>
+        <div class="card-content">
+          <h4 class="course-title"><a [routerLink]="['/course', toSlug(course.title)]">{{ course.title }}</a></h4>
+          <p class="course-modules"><strong>Modules:</strong> {{ course.modules.join(' | ') }}</p>
+          <p class="course-valid">Valid Till {{ course.valid_till }}</p>
+          <p class="course-valid-price">
+            <span class="current">{{ course.price.discounted }}</span>
+            <span class="old">{{ course.price.original }}</span>
+            <span class="off">({{ course.price.discount_percent }}% off)</span>
+          </p>
+          <p class="course-hours">{{ course.hours }} Hours</p>
+          @if (course.training_mode) {
+          <p class="course-mode">{{ course.training_mode }}</p>
+          }
+          <div class="course-rating">
+            <span class="stars" aria-label="4 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+            <span class="reviews">({{ course.reviews }} Reviews)</span>
+          </div>
+          <a class="buy-now-btn" [href]="course.buy_url">Buy Now</a>
+        </div>
+      </div>
+      }
     </div>
+
+    <a routerLink="/all-courses" class="show-all-link">Show all Networking courses <span class="material-icons">arrow_forward</span></a>
   </div>
 </section>
+

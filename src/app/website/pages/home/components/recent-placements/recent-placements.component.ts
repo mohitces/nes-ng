@@ -49,11 +49,9 @@ export class RecentPlacementsComponent {
 
   r1 = this.data.images.slice(0, 11);
   r2 = this.data.images.slice(11, 23);
-  r3 = this.data.images.slice(23, 34);
 
   // Duplicating slightly fewer times than before because there are 11-12 items per row
   // 12 items * ~300px = >3600px width. So 3 copies guarantees smooth looping.
   row1 = [...this.r1, ...this.r1, ...this.r1, ...this.r1];
   row2 = [...this.r2, ...this.r2, ...this.r2, ...this.r2];
-  row3 = [...this.r3, ...this.r3, ...this.r3, ...this.r3];
 }

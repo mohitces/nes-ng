@@ -9,27 +9,22 @@ export class HomeCarouselComponent {
   slides = [
     {
       "index": 1,
-      "url": "https://www.nexpertsolutions.com/blogs/wp-content/uploads/2023/09/ccie1.jpeg",
-      "link": null
-    },
-    // {
-    //   "index": 3,
-    //   "url": "https://www.nexpertsolutions.com/blogs/wp-content/uploads/2023/09/surajsoni.webp",
-    //   "link": null
-    // },
-    {
-      "index": 4,
-      "url": "https://www.nexpertsolutions.com/assets/img/banner/14.png",
+      "url": "assets/images/banners/1.png",
       "link": null
     },
     {
-      "index": 5,
-      "url": "https://www.nexpertsolutions.com/assets/img/banner/11.png",
+      "index": 2,
+      "url": "assets/images/banners/2.png",
+      "link": null
+    },
+    {
+      "index": 3,
+      "url": "assets/images/banners/3.png",
       "link": "https://www.nexpertsolutions.com/cisco/network-automation-devops-online-course-training"
     },
     {
-      "index": 6,
-      "url": "https://www.nexpertsolutions.com/assets/img/banner/13.png",
+      "index": 4,
+      "url": "assets/images/banners/faltu.png",
       "link": null
     }
   ];

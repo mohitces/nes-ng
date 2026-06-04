@@ -9,6 +9,9 @@ import { ExploreCoursesComponent } from './pages/home/components/explore-courses
 import { StudentReviewsComponent } from './pages/home/components/student-reviews/student-reviews.component';
 import { PlacementCompaniesComponent } from './pages/home/components/placement-companies/placement-companies.component';
 import { RecentPlacementsComponent } from './pages/home/components/recent-placements/recent-placements.component';
+import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
+import { BlogsComponent } from './pages/blogs/blogs.component';
+import { AllCoursesComponent } from './pages/all-courses/all-courses.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { RecentPlacementsComponent } from './pages/home/components/recent-placem
     ExploreCoursesComponent,
     StudentReviewsComponent,
     PlacementCompaniesComponent,
-    RecentPlacementsComponent
+    RecentPlacementsComponent,
+    CourseDetailComponent,
+    BlogsComponent,
+    AllCoursesComponent
   ],
   imports: [
     CommonModule,

@@ -1,53 +1,45 @@
 <header class="header">
-  <!-- Top Bar: Green -->
-  <div class="top-bar">
-    <div class="container">
-      <div class="contact-info">
-        <a href="tel:+919582801239" class="contact-item">
-          <i class="material-icons">phone</i>
-          <span>Call us for help +91-9582-801-239</span>
-        </a>
-        <a href="#" class="contact-item">Request a Callback</a>
-        <a href="mailto:info@nexpertsolutions.com" class="contact-item">
-          <i class="material-icons">mail</i>
-          <span>info&#64;nexpertsolutions.com</span>
-        </a>
-      </div>
-      <div class="top-actions">
-        <button class="btn-pay">
-          <i class="material-icons ribbon">payments</i>
-          <span>Pay Online</span>
-        </button>
-      </div>
+  <div class="announcement-strip">
+    <div class="announcement-track">
+      <span>Nexpert Solutions: Real-world networking, cloud, and security training.</span>
+      <span>5x CCIE mentors | Hands-on labs | Career-focused learning paths.</span>
+      <span>Enroll today and build industry-ready skills with NES.</span>
+      <span>Nexpert Solutions: Real-world networking, cloud, and security training.</span>
+      <span>5x CCIE mentors | Hands-on labs | Career-focused learning paths.</span>
+      <span>Enroll today and build industry-ready skills with NES.</span>
     </div>
   </div>
 
   <!-- Main Navigation: White -->
   <nav class="main-nav">
     <div class="container nav-content">
-      <div class="logo">
-        <img src="../../../../assets/images/logo.png" alt="NES Logo" class="logo-img"
+      <a class="logo" routerLink="/" aria-label="Go to home page">
+        <img src="/assets/images/logo/logo without tagline.png" alt="NES Logo" class="logo-img"
           onerror="this.src='https://via.placeholder.com/150x50?text=NES+LOGO'">
-      </div>
+      </a>
 
       <div class="search-container">
         <div class="search-bar">
-          <input type="text" placeholder="What do you want to learn?">
-          <button class="search-btn">
-            <i class="material-icons">search</i>
-          </button>
+          <i class="material-icons search-icon">search</i>
+          <input type="text" placeholder="Search for anything">
         </div>
       </div>
 
       <ul class="nav-links">
         @for (item of menuData; track item.label) {
         <li class="nav-item" [class.has-dropdown]="item.children && item.children.length > 0">
+          @if (item.label === 'Blogs') {
+          <a routerLink="/blogs" class="nav-link">
+            {{ item.label }}
+          </a>
+          } @else {
           <a [href]="item.url" class="nav-link">
             {{ item.label }}
             @if (item.children && item.children.length > 0) {
             <i class="material-icons">expand_more</i>
             }
           </a>
+          }
 
           @if (item.children && item.children.length > 0) {
           <div class="dropdown-container" [class.mega-menu]="item.label === 'All Courses'">
@@ -83,15 +75,19 @@
                 <main class="mega-main-content">
                   <div class="content-header">
                     <h2 class="category-heading">{{ activeCategory }}</h2>
-                    <a [href]="activeCategoryData?.url" class="btn-show-all">
-                      Show all products <i class="material-icons">arrow_forward</i>
+                    <a routerLink="/all-courses" class="btn-show-all">
+                      Show all courses <i class="material-icons">arrow_forward</i>
                     </a>
                   </div>
 
                   <div class="content-grid">
                     @for (course of activeCategoryData?.children; track course.label) {
                     <div class="course-col">
-                      <a [href]="course.url" class="course-link">{{ course.label }}</a>
+                      <a
+                        [routerLink]="['/course', toSlug(course.label)]"
+                        [queryParams]="{ title: course.label, source: course.url }"
+                        class="course-link"
+                      >{{ course.label }}</a>
                     </div>
                     }
                   </div>

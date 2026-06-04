@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap');
 
 /* Slick Carousel Styles */
 @import "slick-carousel/slick/slick.css";
@@ -31,7 +31,7 @@
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.5;
@@ -70,4 +70,18 @@ ul {
   height: 450px;
   overflow: hidden;
   object-fit: cover;
+}
+
+app-footer {
+  display: block !important;
+  width: 100% !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+app-footer .footer {
+  display: block !important;
+  min-height: 300px;
+  visibility: visible !important;
+  opacity: 1 !important;
 }

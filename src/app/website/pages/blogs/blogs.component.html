@@ -1,0 +1,48 @@
+<section class="blogs-page section-padding">
+  <div class="container">
+    <div class="blogs-head">
+      <h1>Latest <span>Blogs</span> From NES</h1>
+      <p>Insights, certification strategies, and practical guides from networking, cloud, and security experts.</p>
+    </div>
+
+    <section class="blogs-hero">
+      <div class="hero-visual">
+        <img [src]="featuredBlog.bannerImage" alt="Latest blog banner">
+      </div>
+
+      <div class="hero-top">
+        <div class="hero-copy">
+          <h1>{{ featuredBlog.title }}</h1>
+        </div>
+        <div class="hero-actions">
+          <p>{{ featuredBlog.subtitle }}</p>
+          <div class="btn-row">
+            <button type="button" class="btn-black">{{ featuredBlog.ctaPrimary }}</button>
+            <button type="button" class="btn-outline">{{ featuredBlog.ctaSecondary }}</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="partner-strip">
+        @for (logo of partnerLogos; track logo) {
+        <img [src]="logo.src" [alt]="logo.name + ' logo'">
+        }
+      </div> -->
+    </section>
+
+    <div class="blogs-grid">
+      @for (blog of blogCards; track blog.title) {
+      <article class="blog-card">
+        <div class="blog-image-wrap">
+          <img [src]="blog.image" [alt]="blog.title">
+          <span class="blog-tag">{{ blog.tag }}</span>
+        </div>
+        <div class="blog-content">
+          <h2>{{ blog.title }}</h2>
+          <p>{{ blog.excerpt }}</p>
+        </div>
+      </article>
+      }
+    </div>
+  </div>
+</section>

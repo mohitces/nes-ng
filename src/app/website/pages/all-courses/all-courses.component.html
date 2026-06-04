@@ -1,0 +1,143 @@
+<section class="all-courses-page">
+  <div class="container">
+    <header class="courses-intro">
+      <div>
+        <span class="eyebrow">NES course catalog</span>
+        <h1>NES networking, cloud, and security courses</h1>
+        <p>
+          Learn with expert mentors, real labs, recordings, and career support.
+        </p>
+      </div>
+      <a class="intro-action" href="https://wa.me/919582801239" target="_blank" rel="noopener">
+        <span class="material-icons">chat</span>
+        Talk to coordinator
+      </a>
+    </header>
+
+    <div class="filters-panel" aria-label="Course filters">
+      <div class="filter-field wide custom-select" [class.open]="openDropdown === 'category'">
+        <span>I want to learn</span>
+        <button type="button" (click)="toggleDropdown('category')" aria-label="Select course category">
+          {{ selectedCategory }}
+          <span class="material-icons">{{ openDropdown === 'category' ? 'close' : 'expand_more' }}</span>
+        </button>
+        @if (openDropdown === 'category') {
+        <div class="select-menu">
+          @for (category of categories; track category.label) {
+          <button type="button" (click)="setCategory(category.label)">{{ category.label }}</button>
+          }
+        </div>
+        }
+      </div>
+      <div class="filter-field custom-select" [class.open]="openDropdown === 'mode'">
+        <span>Training mode</span>
+        <button type="button" (click)="toggleDropdown('mode')" aria-label="Select training mode">
+          {{ selectedTrainingMode }}
+          <span class="material-icons">{{ openDropdown === 'mode' ? 'close' : 'expand_more' }}</span>
+        </button>
+        @if (openDropdown === 'mode') {
+        <div class="select-menu">
+          @for (mode of trainingModes; track mode) {
+          <button type="button" (click)="setTrainingMode(mode)">{{ mode }}</button>
+          }
+        </div>
+        }
+      </div>
+      <label class="filter-field">
+        <span>Lab support</span>
+        <strong>24x7 Available</strong>
+      </label>
+      <label class="filter-field">
+        <span>Career support</span>
+        <strong>Placement Guidance</strong>
+      </label>
+    </div>
+
+    <div class="quick-filter-row">
+      <label class="search-box">
+        <span class="material-icons">search</span>
+        <input type="search" placeholder="Search by course or technology" [value]="searchTerm" (input)="updateSearch($event)">
+      </label>
+    </div>
+
+    <div class="results-heading">
+      <h2>NES courses ideal for your career path</h2>
+      <span>{{ filteredCourses.length }} courses found</span>
+    </div>
+
+    <div class="courses-layout">
+      <main class="course-results">
+        @for (course of filteredCourses; track course.title) {
+        <article class="course-result-card">
+          <img [src]="course.image" [alt]="course.title" class="course-thumb">
+
+          <div class="course-summary">
+            <div class="course-title-row">
+              <h3>{{ course.title }}</h3>
+              <span class="verified"><span class="material-icons">verified</span> NES</span>
+            </div>
+
+            <div class="course-meta">
+              <span><span class="material-icons">workspace_premium</span>{{ courseLevel(course) }}</span>
+              <span><span class="material-icons">schedule</span>{{ displayHours(course) }}</span>
+              <span><span class="material-icons">translate</span>{{ course.language }}</span>
+            </div>
+
+            <p class="course-modules"><strong>Modules:</strong> {{ course.modules.join(' | ') }}</p>
+            <p class="course-valid">Valid Till {{ displayValidTill(course) }}</p>
+            <p class="course-price">
+              <span class="current">{{ displayDiscountedPrice(course) }}</span>
+              @if (showOriginalPrice(course)) {
+              <span class="old">{{ course.price.original }}</span>
+              }
+              @if (course.price.discount_percent) {
+              <span class="off">({{ course.price.discount_percent }}% off)</span>
+              }
+            </p>
+            <p class="course-hours">{{ displayHours(course) }}</p>
+            <span class="course-badge">{{ course.training_mode }}</span>
+            <div class="course-rating">
+              <span class="stars" aria-label="4 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+              <span>{{ displayReviews(course) }}</span>
+            </div>
+
+          </div>
+
+          <aside class="course-actions">
+            <strong>{{ displayDiscountedPrice(course) }}</strong>
+            <span>Valid Till {{ displayValidTill(course) }}</span>
+            <a
+              class="primary-btn"
+              [href]="course.buy_url"
+            >
+              Buy Now
+            </a>
+            <a
+              class="secondary-btn"
+              [routerLink]="['/course', toSlug(course.title)]"
+              [queryParams]="{ title: course.title, source: course.url }"
+            >
+              View course
+            </a>
+          </aside>
+        </article>
+        }
+      </main>
+
+      <aside class="course-feature-panel">
+        <div class="feature-media">
+          <img [src]="featuredCourse.image" [alt]="featuredCourse.title">
+          <div class="play-pill">
+            <span class="material-icons">play_arrow</span>
+          </div>
+        </div>
+        <h3>Plan your certification journey with NES</h3>
+        <p>Speak with a coordinator to choose the right track, batch timing, lab plan, and exam roadmap.</p>
+        <a href="https://wa.me/919582801239" target="_blank" rel="noopener">View full schedule</a>
+        <a [routerLink]="['/course', toSlug(featuredCourse.title)]" [queryParams]="{ title: featuredCourse.title, source: featuredCourse.url }">
+          See featured course
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>
