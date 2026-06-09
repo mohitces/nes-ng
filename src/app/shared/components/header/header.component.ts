@@ -164,7 +164,7 @@ export class HeaderComponent {
     },
     {
       "label": "Contact Us",
-      "url": "https://www.nexpertsolutions.com/contact-us",
+      "url": "/contact",
       "children": []
     }
   ];

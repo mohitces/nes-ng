@@ -32,6 +32,10 @@
           <a routerLink="/blogs" class="nav-link">
             {{ item.label }}
           </a>
+          } @else if (item.label === 'Contact Us') {
+          <a routerLink="/contact" class="nav-link">
+            {{ item.label }}
+          </a>
           } @else {
           <a [href]="item.url" class="nav-link">
             {{ item.label }}

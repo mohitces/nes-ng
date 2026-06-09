@@ -57,6 +57,7 @@
           <p class="course-valid">Valid Till {{ course.valid_till }}</p>
           <p class="course-valid-price">
             <span class="current">{{ course.price.discounted }}</span>
+            <span class="old">{{ course.price.original }}</span>
             <span class="off">({{ course.price.discount_percent }}% off)</span>
           </p>
           <p class="course-hours">{{ course.hours }} Hours</p>
@@ -76,4 +77,3 @@
     <a routerLink="/all-courses" class="show-all-link">Show all Networking courses <span class="material-icons">arrow_forward</span></a>
   </div>
 </section>
-

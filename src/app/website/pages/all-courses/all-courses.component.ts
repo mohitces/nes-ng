@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ALL_COURSE_PAGES } from '../../data/all-course-pages.data';
-import { Course, formatPrice } from '../../data/courses.data';
+import { Course } from '../../data/courses.data';
 import { SCRAPED_COURSE_CONTENT } from '../../data/scraped-course-content.data';
-import { CourseApiService } from '../../services/course-api.service';
 
 interface CourseCategory {
   label: string;
@@ -14,7 +13,7 @@ interface CourseCategory {
   templateUrl: './all-courses.component.html',
   styleUrl: './all-courses.component.scss'
 })
-export class AllCoursesComponent implements OnInit {
+export class AllCoursesComponent {
   courses = this.buildCourseCatalog();
   selectedCategory = 'All';
   selectedTrainingMode = 'All Modes';
@@ -37,14 +36,6 @@ export class AllCoursesComponent implements OnInit {
   ];
 
   trainingModes = ['All Modes', 'Online', 'Offline', 'Hybrid'];
-
-  constructor(private courseApi: CourseApiService) {}
-
-  ngOnInit(): void {
-    this.courseApi.getLiveCourses().subscribe((liveCourses) => {
-      this.courses = this.mergeCourseCatalog(liveCourses, this.buildCourseCatalog());
-    });
-  }
 
   get filteredCourses(): Course[] {
     const query = this.searchTerm.trim().toLowerCase();
@@ -119,11 +110,13 @@ export class AllCoursesComponent implements OnInit {
   }
 
   displayDiscountedPrice(course: Course): string {
-    return formatPrice(course.price?.discounted || 'Price on request');
+    return course.price.discounted && course.price.discounted !== 'Contact coordinator'
+      ? course.price.discounted
+      : 'Contact coordinator';
   }
 
   showOriginalPrice(course: Course): boolean {
-    return Boolean(course.price?.original && !/price on request/i.test(formatPrice(course.price.original)));
+    return Boolean(course.price.original && course.price.original !== 'Contact coordinator');
   }
 
   private buildCourseCatalog(): Course[] {
@@ -154,8 +147,8 @@ export class AllCoursesComponent implements OnInit {
         hours: scraped.hours || 0,
         buy_url: scraped.buy_url || scraped.url,
         price: scraped.price || {
-          discounted: 'Price on request',
-          original: 'Price on request',
+          discounted: 'Contact coordinator',
+          original: 'Contact coordinator',
           discount_percent: 0
         },
         source_summary: scraped.source_summary || `${scraped.title} training course from NES scraped course content.`,
@@ -164,22 +157,6 @@ export class AllCoursesComponent implements OnInit {
         prerequisite: scraped.prerequisite || 'As per NES live page',
         page_sections: scraped.page_sections
       });
-    });
-
-    return catalog;
-  }
-
-  private mergeCourseCatalog(...groups: Course[][]): Course[] {
-    const seen = new Set<string>();
-    const catalog: Course[] = [];
-
-    groups.flat().forEach((course) => {
-      const key = this.normalizeCourseKey(course.url || course.title);
-      const titleKey = this.toSlug(course.title);
-      if (seen.has(key) || seen.has(titleKey)) return;
-      seen.add(key);
-      seen.add(titleKey);
-      catalog.push({ ...course, index: catalog.length + 1 });
     });
 
     return catalog;

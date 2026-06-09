@@ -1,0 +1,236 @@
+<section class="contact-page">
+  <div class="container">
+    <header class="contact-intro">
+      <div>
+        <span class="eyebrow">Get in touch</span>
+        <h1>We'd love to <span>hear from you</span></h1>
+        <p>
+          Have questions about courses, training modes, or career programs? Our coordinators are ready to help.
+        </p>
+      </div>
+      <div class="quick-actions">
+        @for (action of quickActions; track action.label) {
+        <a
+          class="quick-action"
+          [class.primary]="action.variant === 'primary'"
+          [class.outline]="action.variant === 'outline'"
+          [class.dark]="action.variant === 'dark'"
+          [href]="action.href"
+          target="_blank"
+          rel="noopener">
+          <span class="material-icons">{{ action.icon }}</span>
+          {{ action.label }}
+        </a>
+        }
+      </div>
+    </header>
+
+    <div class="contact-layout">
+      <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-header">
+          <h2>Send us a message</h2>
+          <p>Fill in your details and we'll get back to you shortly.</p>
+        </div>
+
+        @if (submitSuccess) {
+        <div class="form-success" role="status">
+          <span class="material-icons">check_circle</span>
+          <p>Thank you! Your message has been submitted. Our team will contact you soon.</p>
+        </div>
+        }
+
+        <div class="form-grid">
+          <label class="form-field" [class.invalid]="isInvalid('name')">
+            <span>Name <em>*</em></span>
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Your full name"
+              aria-label="Name"
+              [attr.aria-invalid]="isInvalid('name')">
+            @if (isInvalid('name')) {
+            <small class="field-error">{{ getError('name') }}</small>
+            }
+          </label>
+
+          <label class="form-field" [class.invalid]="isInvalid('email')">
+            <span>Email <em>*</em></span>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="you@example.com"
+              aria-label="Email"
+              [attr.aria-invalid]="isInvalid('email')">
+            @if (isInvalid('email')) {
+            <small class="field-error">{{ getError('email') }}</small>
+            }
+          </label>
+
+          <label class="form-field" [class.invalid]="isInvalid('phone')">
+            <span>Phone <em>*</em></span>
+            <input
+              type="tel"
+              formControlName="phone"
+              placeholder="+91-XXXXXXXXXX"
+              aria-label="Phone"
+              [attr.aria-invalid]="isInvalid('phone')">
+            @if (isInvalid('phone')) {
+            <small class="field-error">{{ getError('phone') }}</small>
+            }
+          </label>
+
+          <label class="form-field" [class.invalid]="isInvalid('country')">
+            <span>Your Country <em>*</em></span>
+            <input
+              type="text"
+              formControlName="country"
+              placeholder="India"
+              aria-label="Your Country"
+              [attr.aria-invalid]="isInvalid('country')">
+            @if (isInvalid('country')) {
+            <small class="field-error">{{ getError('country') }}</small>
+            }
+          </label>
+
+          <div
+            class="form-field full-width course-combobox"
+            #courseCombobox
+            [class.invalid]="isInvalid('course')"
+            [class.open]="courseDropdownOpen">
+            <span>Course <em>*</em></span>
+            <div class="combobox-control">
+              <span class="material-icons search-icon">search</span>
+              <input
+                type="text"
+                [value]="courseSearchTerm"
+                (input)="onCourseSearchInput($event)"
+                (focus)="openCourseDropdown()"
+                placeholder="Search or select a course"
+                aria-label="Search or select course"
+                autocomplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                [attr.aria-expanded]="courseDropdownOpen"
+                [attr.aria-invalid]="isInvalid('course')">
+              <button
+                type="button"
+                class="toggle-btn"
+                (click)="courseDropdownOpen ? closeCourseDropdown() : openCourseDropdown()"
+                aria-label="Toggle course list">
+                <span class="material-icons">{{ courseDropdownOpen ? 'expand_less' : 'expand_more' }}</span>
+              </button>
+            </div>
+            @if (courseDropdownOpen) {
+            <ul class="course-options" role="listbox">
+              @if (filteredCourses.length) {
+              @for (course of filteredCourses; track course) {
+              <li>
+                <button
+                  type="button"
+                  role="option"
+                  [class.selected]="selectedCourse === course"
+                  (click)="selectCourse(course)">
+                  {{ course }}
+                </button>
+              </li>
+              }
+              } @else {
+              <li class="no-results">No courses match your search.</li>
+              }
+            </ul>
+            }
+            @if (isInvalid('course')) {
+            <small class="field-error">{{ getError('course') }}</small>
+            }
+          </div>
+
+          <label class="form-field full-width" [class.invalid]="isInvalid('trainingMode')">
+            <span>Mode of Training <em>*</em></span>
+            <select formControlName="trainingMode" aria-label="Select Mode Of Training" [attr.aria-invalid]="isInvalid('trainingMode')">
+              <option value="">Select Mode Of Training</option>
+              @for (mode of trainingModes; track mode) {
+              <option [value]="mode">{{ mode }}</option>
+              }
+            </select>
+            @if (isInvalid('trainingMode')) {
+            <small class="field-error">{{ getError('trainingMode') }}</small>
+            }
+          </label>
+
+          <label class="form-field full-width" [class.invalid]="isInvalid('message')">
+            <span>Message <em>*</em></span>
+            <textarea
+              formControlName="message"
+              rows="5"
+              placeholder="Tell us about your learning goals..."
+              aria-label="Message"
+              [attr.aria-invalid]="isInvalid('message')"></textarea>
+            @if (isInvalid('message')) {
+            <small class="field-error">{{ getError('message') }}</small>
+            }
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span class="material-icons">send</span>
+          Send Message
+        </button>
+      </form>
+
+      <aside class="contact-sidebar">
+        <div class="help-banner">
+          <span class="material-icons">support_agent</span>
+          <div>
+            <strong>Need quick help?</strong>
+            <p>Call us at <a href="tel:+919582801239">+91-9582-801-239</a></p>
+          </div>
+        </div>
+
+        @for (card of contactCards; track card.title) {
+        <article class="info-card">
+          <div class="info-card-head">
+            <span class="material-icons">{{ card.icon }}</span>
+            <h3>{{ card.title }}</h3>
+          </div>
+          <p>{{ card.content }}</p>
+          <a [href]="card.action.href" target="_blank" rel="noopener">{{ card.action.label }}</a>
+        </article>
+        }
+
+        <a class="job-guarantee-card" [href]="jobGuaranteeUrl" target="_blank" rel="noopener">
+          <span class="material-icons">verified</span>
+          <div>
+            <strong>100% Job Guarantee</strong>
+            <p>Explore NES career programs with placement support.</p>
+          </div>
+          <span class="material-icons arrow">arrow_forward</span>
+        </a>
+      </aside>
+    </div>
+
+    <section class="map-section">
+      <div class="map-copy">
+        <span class="eyebrow">Visit our campus</span>
+        <h2>Noida training center</h2>
+        <p>{{ officeAddress }}</p>
+        <a class="directions-btn" [href]="mapsUrl" target="_blank" rel="noopener">
+          <span class="material-icons">near_me</span>
+          Open in Google Maps
+        </a>
+      </div>
+      <div class="map-frame">
+        <iframe
+          [src]="safeMapEmbedUrl"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="NES office location map">
+        </iframe>
+      </div>
+    </section>
+  </div>
+
+  <a class="whatsapp-float" [href]="whatsappUrl" target="_blank" rel="noopener">
+    <span class="material-icons">chat</span>
+    Chat with us on WhatsApp
+  </a>
+</section>

@@ -85,6 +85,15 @@
 
             <p class="course-modules"><strong>Modules:</strong> {{ course.modules.join(' | ') }}</p>
             <p class="course-valid">Valid Till {{ displayValidTill(course) }}</p>
+            <p class="course-price">
+              <span class="current">{{ displayDiscountedPrice(course) }}</span>
+              @if (showOriginalPrice(course)) {
+              <span class="old">{{ course.price.original }}</span>
+              }
+              @if (course.price.discount_percent) {
+              <span class="off">({{ course.price.discount_percent }}% off)</span>
+              }
+            </p>
             <p class="course-hours">{{ displayHours(course) }}</p>
             <span class="course-badge">{{ course.training_mode }}</span>
             <div class="course-rating">

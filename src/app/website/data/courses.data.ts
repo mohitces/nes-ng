@@ -39,17 +39,6 @@ export interface Course {
   };
 }
 
-export function formatPrice(value?: string): string {
-  if (!value) return '₹ On request';
-
-  const text = value.trim();
-  if (/contact coordinator/i.test(text) || /price on request/i.test(text)) {
-    return '₹ On request';
-  }
-
-  return text.replace(/\bINR\b/gi, '₹').replace(/\s+/g, ' ').trim();
-}
-
 export const TOP_COURSES: Course[] = [
   {
     index: 1,
@@ -211,11 +200,4 @@ export const TOP_COURSES: Course[] = [
     language: 'English | Hindi',
     prerequisite: 'As per NES live page'
   }
-].map((course) => ({
-  ...course,
-  price: {
-    discounted: formatPrice(course.price.discounted),
-    original: formatPrice(course.price.original),
-    discount_percent: course.price.discount_percent
-  }
-}));
+];

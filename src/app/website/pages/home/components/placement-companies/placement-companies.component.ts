@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ContentApiService } from '../../../../services/content-api.service';
 
 @Component({
   selector: 'app-placement-companies',
@@ -7,7 +6,7 @@ import { ContentApiService } from '../../../../services/content-api.service';
   styleUrl: './placement-companies.component.scss'
 })
 export class PlacementCompaniesComponent {
-  data: any = {
+  data = {
     "section_title": "Placement Companies",
     "tagline": "Every 8th Network Security Engineer Working in MNC in Delhi NCR is a student of NES.",
     "total_images": 17,
@@ -40,27 +39,4 @@ export class PlacementCompaniesComponent {
   row1 = [...this.r1, ...this.r1, ...this.r1, ...this.r1, ...this.r1];
   row2 = [...this.r2, ...this.r2, ...this.r2, ...this.r2, ...this.r2];
   row3 = [...this.r3, ...this.r3, ...this.r3, ...this.r3, ...this.r3];
-
-  constructor(private contentApi: ContentApiService) {
-    this.contentApi.getSiteContent('partners', 'placement-companies').subscribe({
-      next: (response) => {
-        const content = response.data?.[0]?.data;
-        const images = (content?.images || []).filter((image: any) => image.status !== 'inactive' && image.url);
-        if (!images.length) return;
-
-        this.data = { ...this.data, ...content, images };
-        this.rebuildRows(images);
-      }
-    });
-  }
-
-  private rebuildRows(images: any[]): void {
-    const chunk = Math.ceil(images.length / 3);
-    this.r1 = images.slice(0, chunk);
-    this.r2 = images.slice(chunk, chunk * 2);
-    this.r3 = images.slice(chunk * 2);
-    this.row1 = [...this.r1, ...this.r1, ...this.r1, ...this.r1, ...this.r1];
-    this.row2 = [...this.r2, ...this.r2, ...this.r2, ...this.r2, ...this.r2];
-    this.row3 = [...this.r3, ...this.r3, ...this.r3, ...this.r3, ...this.r3];
-  }
 }

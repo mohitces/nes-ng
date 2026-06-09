@@ -12,8 +12,8 @@ const makeCourse = (index: number, title: string, url: string): Course => ({
   hours: 0,
   buy_url: url,
   price: {
-    discounted: 'Price on request',
-    original: 'Price on request',
+    discounted: 'Contact coordinator',
+    original: 'Contact coordinator',
     discount_percent: 0
   },
   source_summary: `${title} training course page mapped from NES live URL. Detailed text sections are prepared for per-course content sync.`,

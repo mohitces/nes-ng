@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { WebsiteRoutingModule } from './website-routing.module';
@@ -12,7 +13,7 @@ import { RecentPlacementsComponent } from './pages/home/components/recent-placem
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { AllCoursesComponent } from './pages/all-courses/all-courses.component';
-import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 
 @NgModule({
@@ -26,10 +27,11 @@ import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
     CourseDetailComponent,
     BlogsComponent,
     AllCoursesComponent,
-    BlogDetailComponent
+    ContactComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     WebsiteRoutingModule,
     SlickCarouselModule
   ]
