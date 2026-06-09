@@ -72,7 +72,7 @@
 
     <div class="blogs-grid">
       @for (blog of blogCards; track blog.title) {
-      <article class="blog-card" [routerLink]="['/blogs']">
+      <article class="blog-card" [routerLink]="['/blog', blog.slug]">
         <div class="blog-image-wrap">
           <img [src]="blog.image" [alt]="blog.title">
           <span class="blog-tag">{{ blog.tag }}</span>

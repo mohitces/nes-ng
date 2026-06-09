@@ -1,0 +1,24 @@
+<section class="blog-detail-page section-padding">
+  <div class="container">
+    @if (loading) {
+      <p class="muted">Loading blog...</p>
+    } @else if (!post) {
+      <p class="muted">This blog post is not available right now.</p>
+    } @else {
+      <article class="blog-detail-card">
+        <img class="blog-detail-image" [src]="post.image || 'assets/images/learn skills image/computer networks.png'" [alt]="post.title">
+
+        <div class="blog-detail-body">
+          <p class="blog-detail-tag">{{ (post.tags && post.tags[0]) || 'NES Blog' }}</p>
+          <h1>{{ post.title }}</h1>
+          <p class="blog-detail-excerpt">{{ post.meta_description || 'Read the full NES article below.' }}</p>
+          <div class="blog-detail-meta">
+            <span>Author: {{ post.author || 'NES Team' }}</span>
+            <span>{{ post.updatedAt | date:'mediumDate' }}</span>
+          </div>
+          <div class="blog-detail-content" [innerHTML]="post.content"></div>
+        </div>
+      </article>
+    }
+  </div>
+</section>

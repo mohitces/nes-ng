@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ALL_COURSE_PAGES } from '../../data/all-course-pages.data';
 import { Course, TOP_COURSES } from '../../data/courses.data';
+import { CourseApiService } from '../../services/course-api.service';
 
 interface CourseContentSection {
   title: string;
@@ -28,15 +29,34 @@ export class CourseDetailComponent {
   enquiryCourses = ALL_COURSE_PAGES.map((course) => course.title);
   coursePages = [...TOP_COURSES, ...ALL_COURSE_PAGES];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private courseApi: CourseApiService) {
     this.route.paramMap.subscribe(params => {
       const slug = params.get('slug') || '';
       this.course = this.coursePages.find(c => this.toSlug(c.title) === slug) || ALL_COURSE_PAGES[0];
+      this.courseApi.getLiveCourses().subscribe((liveCourses) => {
+        this.coursePages = this.mergeCoursePages(liveCourses, [...TOP_COURSES, ...ALL_COURSE_PAGES]);
+        this.enquiryCourses = this.coursePages.map((course) => course.title);
+        this.course = this.coursePages.find(c => this.toSlug(c.title) === slug) || this.course;
+      });
     });
     this.route.queryParamMap.subscribe(params => {
       this.fallbackTitle = params.get('title') || '';
       this.sourceUrl = params.get('source') || '';
     });
+  }
+
+  private mergeCoursePages(...groups: Course[][]): Course[] {
+    const seen = new Set<string>();
+    const pages: Course[] = [];
+
+    groups.flat().forEach((course) => {
+      const key = this.toSlug(course.title);
+      if (seen.has(key)) return;
+      seen.add(key);
+      pages.push(course);
+    });
+
+    return pages;
   }
 
   toSlug(value: string): string {

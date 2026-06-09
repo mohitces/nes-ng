@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ContentApiService } from '../../../../services/content-api.service';
 
 interface Review {
   index: number;
@@ -13,7 +14,7 @@ interface Review {
   styleUrl: './student-reviews.component.scss'
 })
 export class StudentReviewsComponent {
-  reviewData = {
+  reviewData: any = {
     "section_title": "Our Students Reviews",
     "rating_image": "https://www.nexpertsolutions.com/assets/img/CCIE-Security-Online-Certification.webp",
     "reviews": [
@@ -41,6 +42,21 @@ export class StudentReviewsComponent {
       { "index": 22, "name": "Prerna", "avatar": "https://www.nexpertsolutions.com/assets/img/ccie-institute-in-noida.webp", "review": "Hi Everyone, This side prerna, I Enrolled at Net Expert Solutions for AWS. Trainers & 24*7 well-equipped lab was very good at NES. I learned Everything on live racks. I will suggest If anybody is looking for a career in networking. then you can join NES & build Your career, this is an amazing platform for networking." }
     ]
   };
+
+  constructor(private contentApi: ContentApiService) {
+    this.contentApi.getSiteContent('feedback', 'student-reviews').subscribe({
+      next: (response) => {
+        const content = response.data?.[0]?.data;
+        if (content?.reviews?.length) {
+          this.reviewData = {
+            ...this.reviewData,
+            ...content,
+            reviews: content.reviews.filter((review: any) => review.status !== 'Archived' && review.status !== 'Draft')
+          };
+        }
+      }
+    });
+  }
 
   slideConfig = {
     "slidesToShow": 3,

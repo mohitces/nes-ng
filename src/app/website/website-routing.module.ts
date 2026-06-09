@@ -4,12 +4,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { AllCoursesComponent } from './pages/all-courses/all-courses.component';
+import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'all-courses', component: AllCoursesComponent },
   { path: 'course/:slug', component: CourseDetailComponent },
-  { path: 'blogs', component: BlogsComponent }
+  { path: 'blogs', component: BlogsComponent },
+  { path: 'blog/:slug', component: BlogDetailComponent }
 ];
 
 @NgModule({

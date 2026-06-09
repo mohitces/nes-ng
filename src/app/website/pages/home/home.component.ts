@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { BlogPost, ContentApiService } from '../../services/content-api.service';
 
 @Component({
   selector: 'app-home',
@@ -21,26 +22,17 @@ export class HomeComponent implements AfterViewInit {
     { name: 'Karan Verma', company: 'Tech Mahindra', designation: 'Infrastructure Engineer', logo: 'https://www.nexpertsolutions.com/assets/img/AWS-Online-Training.webp', image: 'assets/images/people images ai generated/placement images dummy/8.png' }
   ];
 
-  blogCards = [
-    {
-      tag: 'Enterprise-wide training',
-      title: 'Upskill your entire organization',
-      excerpt: 'Cultivate a learning culture that keeps every team engaged and growing.',
-      image: 'assets/images/learn skills image/computer networks.png'
-    },
-    {
-      tag: 'Certification preparation',
-      title: 'Develop and validate skills',
-      excerpt: 'Build role-ready capabilities with structured certification-focused learning paths.',
-      image: 'assets/images/learn skills image/IT Certified.png'
-    },
-    {
-      tag: 'Cloud and Security',
-      title: 'Boost productivity with modern tech',
-      excerpt: 'Help teams apply cloud and security best practices with practical guided learning.',
-      image: 'assets/images/learn skills image/cloud computing.png'
-    }
-  ];
+  constructor(private contentApi: ContentApiService) {
+    this.contentApi.getBlogs().subscribe({
+      next: (response) => {
+        const posts = (response.data || []).slice(0, 3);
+        if (!posts.length) return;
+        this.blogCards = posts.map((post) => this.toBlogCard(post));
+      }
+    });
+  }
+
+  blogCards: { slug: string; tag: string; title: string; excerpt: string; image: string; }[] = [];
 
   scrollSkills(direction: 'left' | 'right'): void {
     const scroller = this.skillsScroller?.nativeElement;
@@ -69,5 +61,15 @@ export class HomeComponent implements AfterViewInit {
     const maxScroll = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
     this.totalSlides = Math.max(1, Math.ceil(maxScroll / (step * 2)) + 1);
     this.currentSlide = Math.max(0, Math.min(this.totalSlides - 1, Math.round(scroller.scrollLeft / (step * 2))));
+  }
+
+  private toBlogCard(post: BlogPost): any {
+    return {
+      slug: post.slug || post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+      tag: post.tags?.[0] || 'NES Blog',
+      title: post.title,
+      excerpt: post.meta_description || post.content.replace(/<[^>]+>/g, '').slice(0, 140),
+      image: post.image || 'assets/images/learn skills image/computer networks.png'
+    };
   }
 }

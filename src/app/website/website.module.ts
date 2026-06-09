@@ -12,6 +12,7 @@ import { RecentPlacementsComponent } from './pages/home/components/recent-placem
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { AllCoursesComponent } from './pages/all-courses/all-courses.component';
+import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AllCoursesComponent } from './pages/all-courses/all-courses.component';
     RecentPlacementsComponent,
     CourseDetailComponent,
     BlogsComponent,
-    AllCoursesComponent
+    AllCoursesComponent,
+    BlogDetailComponent
   ],
   imports: [
     CommonModule,

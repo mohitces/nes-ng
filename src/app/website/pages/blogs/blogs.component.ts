@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BlogPost, ContentApiService } from '../../services/content-api.service';
 
 interface BlogCard {
+  slug: string;
   tag: string;
   title: string;
   excerpt: string;
@@ -12,7 +14,7 @@ interface BlogCard {
   templateUrl: './blogs.component.html',
   styleUrl: './blogs.component.scss'
 })
-export class BlogsComponent {
+export class BlogsComponent implements OnInit {
   featuredBlog = {
     title: 'NES blogs for networking, cloud, and cybersecurity career growth',
     subtitle: 'Explore practical training insights, certification roadmaps, and career guidance from NES mentors.',
@@ -36,25 +38,28 @@ export class BlogsComponent {
     { name: 'Placement company', src: 'https://www.nexpertsolutions.com/assets/img/Devnet-Online-Training.webp' }
   ];
 
-  blogCards: BlogCard[] = [
-    {
-      tag: 'Enterprise-wide training',
-      title: 'Upskill your entire organization',
-      excerpt: 'Cultivate a learning culture that keeps every team engaged and growing.',
-      image: 'assets/images/learn skills image/computer networks.png'
-    },
-    {
-      tag: 'Certification preparation',
-      title: 'Develop and validate skills',
-      excerpt: 'Build role-ready capabilities with structured certification-focused learning paths.',
-      image: 'assets/images/learn skills image/IT Certified.png'
-    },
-    {
-      tag: 'Cloud and Security',
-      title: 'Boost productivity with modern tech',
-      excerpt: 'Help teams apply cloud and security best practices with practical guided learning.',
-      image: 'assets/images/learn skills image/cloud computing.png'
-    }
-  ];
+  blogCards: BlogCard[] = [];
+
+  constructor(private contentApi: ContentApiService) {}
+
+  ngOnInit(): void {
+    this.contentApi.getBlogs().subscribe({
+      next: (response) => {
+        const posts = response.data || [];
+        if (!posts.length) return;
+        this.blogCards = posts.map((post) => this.toCard(post));
+      }
+    });
+  }
+
+  private toCard(post: BlogPost): BlogCard {
+    return {
+      slug: post.slug || post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+      tag: post.tags?.[0] || 'NES Blog',
+      title: post.title,
+      excerpt: post.meta_description || post.content.replace(/<[^>]+>/g, '').slice(0, 140),
+      image: post.image || 'assets/images/learn skills image/computer networks.png'
+    };
+  }
 }
 

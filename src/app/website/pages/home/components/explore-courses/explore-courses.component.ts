@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Course, TOP_COURSES } from '../../../../data/courses.data';
+import { CourseApiService } from '../../../../services/course-api.service';
 
 interface Step {
   step: number;
@@ -26,7 +27,7 @@ interface Category {
   templateUrl: './explore-courses.component.html',
   styleUrl: './explore-courses.component.scss'
 })
-export class ExploreCoursesComponent {
+export class ExploreCoursesComponent implements OnInit {
   destinationData: DestinationData = {
     "section_title": "Destination for Pool of Network Technologies",
     "subtitle": "(Enroll yourself to learn most demanding technology trainings)",
@@ -105,6 +106,14 @@ export class ExploreCoursesComponent {
 
   topCourses: Course[] = TOP_COURSES;
 
+  constructor(private courseApi: CourseApiService) {}
+
+  ngOnInit(): void {
+    this.courseApi.getLiveCourses().subscribe((liveCourses) => {
+      this.topCourses = this.mergeCourses(liveCourses, TOP_COURSES).slice(0, 8);
+    });
+  }
+
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 1,
@@ -136,6 +145,20 @@ export class ExploreCoursesComponent {
 
   toSlug(value: string): string {
     return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  private mergeCourses(liveCourses: Course[], staticCourses: Course[]): Course[] {
+    const seen = new Set<string>();
+    const courses: Course[] = [];
+
+    [...liveCourses, ...staticCourses].forEach((course) => {
+      const key = this.toSlug(course.title);
+      if (seen.has(key)) return;
+      seen.add(key);
+      courses.push({ ...course, index: courses.length + 1 });
+    });
+
+    return courses;
   }
 }
 
