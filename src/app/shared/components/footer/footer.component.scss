@@ -3,10 +3,13 @@
   width: 100%;
   position: relative;
   z-index: 10;
-  background: linear-gradient(180deg, #03140a 0%, #0b5d2d 56%, #1f9a57 100%);
+  background: #000;
   color: #f5f9ff;
   padding: 40px 0 24px;
   font-family: 'Nunito Sans', sans-serif;
+
+
+
 
   .footer-container {
     width: min(1880px, 95%);
@@ -83,18 +86,18 @@
   }
 
   .footer-nes-logo {
-    width: clamp(110px, 12vw, 170px);
+    width: clamp(110px, 20vw, 170px);
     height: auto;
     display: block;
     object-fit: contain;
     padding: 0;
     border-radius: 0;
     background: transparent;
-    box-shadow: none;
+    /*box-shadow: none;
     filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.9))
       drop-shadow(0 0 44px rgba(255, 255, 255, 0.62))
       drop-shadow(0 0 72px rgba(255, 255, 255, 0.42))
-      drop-shadow(0 0 104px rgba(255, 255, 255, 0.24));
+      drop-shadow(0 0 104px rgba(255, 255, 255, 0.24));*/
   }
 
   .location-grid {
@@ -111,9 +114,10 @@
     border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 16px;
     padding: 14px 20px;
-    background: rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 0.08);
     cursor: pointer;
   }
+
 
   .location-card h4 {
     margin: 0 0 10px;
@@ -259,6 +263,45 @@
     white-space: nowrap;
   }
 
+  .employee-verification-strip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 24px;
+    font-size: clamp(14px, 0.95vw, 16px);
+    color: #e2e8f0;
+
+    .verification-icon {
+      font-size: 24px;
+      color: #16a34a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .verification-text {
+      line-height: 1.4;
+      strong {
+        color: #ffffff;
+        font-weight: 700;
+      }
+      a {
+        color: #3b82f6;
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.2s ease;
+        &:hover {
+          color: #60a5fa;
+        }
+      }
+    }
+  }
+
   .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.16);
     padding-top: 24px;
@@ -360,6 +403,13 @@
   .footer .unit-name { font-size: 22px; }
   .footer .unit-card { flex-direction: column; align-items: flex-start; }
   .footer .unit-link { white-space: normal; }
+
+  .footer .employee-verification-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+  }
 
   .footer .footer-bottom {
     flex-direction: column;

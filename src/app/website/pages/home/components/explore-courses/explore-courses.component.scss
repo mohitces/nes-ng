@@ -259,7 +259,7 @@
   }
 
   /* Course Card Styling */
-  .course-card {
+.course-card {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -269,7 +269,7 @@
     overflow: hidden;
     text-decoration: none;
     background: #fff;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #28a745;
 
     .card-image {
       position: relative;

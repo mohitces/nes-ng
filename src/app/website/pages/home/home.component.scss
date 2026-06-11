@@ -183,13 +183,20 @@
     display: grid;
     grid-template-columns: 1.1fr 2.4fr;
     gap: 2rem;
-    align-items: center;
+    align-items: stretch;
+  }
+
+  .skills-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
   }
 
   .skills-copy h2 {
-    font-size: 3rem;
-    line-height: 1.1;
-    margin: 0 0 1rem;
+    font-size: 3.6rem;
+    line-height: 1.05;
+    margin: 0 0 1.2rem;
     color: #1b2542;
     font-weight: 700;
   }
@@ -204,10 +211,10 @@
   }
 
   .skills-copy p {
-    font-size: 1.1rem;
-    line-height: 1.5;
+    font-size: 1.25rem;
+    line-height: 1.55;
     color: #445b84;
-    max-width: 420px;
+    max-width: 460px;
     margin: 0;
   }
 
@@ -307,9 +314,8 @@
   }
 
   .carousel-controls {
-    margin-top: 1.2rem;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 1.2rem;
   }
@@ -683,8 +689,14 @@
       overflow-x: auto;
     }
 
+    .skills-left {
+      display: block;
+      height: auto;
+    }
+
     .carousel-controls {
       margin-top: 1rem;
+      justify-content: center;
     }
 
     .skill-card {

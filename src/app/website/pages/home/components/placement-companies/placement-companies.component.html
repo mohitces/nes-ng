@@ -7,12 +7,12 @@
   <div class="scrolling-stage">
     <!-- Row 1: Left to Right -->
     <div class="marquee-row">
-      <div class="marquee-content marquee-left">
+      <div class="marquee-content marquee-right">
         @for (img of row1; track $index) {
           <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
         }
       </div>
-      <div class="marquee-content marquee-left" aria-hidden="true">
+      <div class="marquee-content marquee-right" aria-hidden="true">
         @for (img of row1; track $index) {
           <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
         }
@@ -35,12 +35,12 @@
 
     <!-- Row 3: Left to Right -->
     <div class="marquee-row">
-      <div class="marquee-content marquee-left" style="animation-duration: 90s;">
+      <div class="marquee-content marquee-right" style="animation-duration: 90s;">
         @for (img of row3; track $index) {
           <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
         }
       </div>
-      <div class="marquee-content marquee-left" aria-hidden="true" style="animation-duration: 90s;">
+      <div class="marquee-content marquee-right" aria-hidden="true" style="animation-duration: 90s;">
         @for (img of row3; track $index) {
           <div class="company-logo"><img [src]="img.url" alt="Placement Company"></div>
         }

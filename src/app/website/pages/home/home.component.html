@@ -27,9 +27,21 @@
 
 <section class="learn-skills section-padding">
   <div class="container learn-skills-wrap">
-    <div class="skills-copy">
-      <h2>Meet Our <span class="placed-highlight">Recently Placed</span> Students</h2>
-      <p> NES learners turned hands-on training into real career outcomes and are now working in leading technology companies.</p>
+    <div class="skills-left">
+      <div class="skills-copy">
+        <h2>Meet Our <span class="placed-highlight">Recently Placed</span> Students</h2>
+        <p> NES learners turned hands-on training into real career outcomes and are now working in leading technology companies.</p>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="carousel-btn" type="button" (click)="scrollSkills('left')">&#8592;</button>
+        <div class="dots">
+          @for (dot of [].constructor(totalSlides || 4); track $index) {
+          <span class="dot" [class.active]="$index === currentSlide"></span>
+          }
+        </div>
+        <button class="carousel-btn" type="button" (click)="scrollSkills('right')">&#8594;</button>
+      </div>
     </div>
 
     <div class="skills-carousel-wrap">
@@ -47,16 +59,6 @@
         </a>
         }
       </div>
-    </div>
-
-    <div class="carousel-controls">
-      <button class="carousel-btn" type="button" (click)="scrollSkills('left')">&#8592;</button>
-      <div class="dots">
-        @for (dot of [].constructor(totalSlides || 4); track $index) {
-        <span class="dot" [class.active]="$index === currentSlide"></span>
-        }
-      </div>
-      <button class="carousel-btn" type="button" (click)="scrollSkills('right')">&#8594;</button>
     </div>
   </div>
 </section>
