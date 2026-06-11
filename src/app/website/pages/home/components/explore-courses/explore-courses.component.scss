@@ -408,17 +408,16 @@
       }
 
       .buy-now-btn {
-        display: inline-block;
-        margin-top: auto;
-        margin-bottom: 0;
-        background: #2f9e44;
-        color: #fff;
-        font-size: 1.05rem;
-        font-weight: 700;
-        border-radius: 8px;
-        padding: 0.45rem 0.9rem;
-        text-decoration: none;
-      }
+    display: inline-block;
+    width: fit-content; /* only as wide as the text */
+    background: #2f9e44;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    text-decoration: none;
+}
 
       .price-section {
         margin-top: 0.6rem;
