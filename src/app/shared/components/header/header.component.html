@@ -14,9 +14,13 @@
   <nav class="main-nav">
     <div class="container nav-content">
       <a class="logo" routerLink="/" aria-label="Go to home page">
-<img src="/assets/images/logo/logo.png" alt="NES Logo" class="logo-img"
+<img src="assets/images/logo/logo.png" alt="NES Logo" class="logo-img"
           onerror="this.src='https://via.placeholder.com/150x50?text=NES+LOGO'">
       </a>
+
+      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()" aria-label="Toggle navigation menu">
+        <i class="material-icons">menu</i>
+      </button>
 
       <div class="search-container">
         <div class="search-bar">
@@ -114,4 +118,115 @@
 
     </div>
   </nav>
+
+  <!-- Mobile Navigation Drawer Overlay -->
+  <div class="mobile-drawer-overlay" [class.open]="isMobileMenuOpen" (click)="toggleMobileMenu()"></div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-drawer" [class.open]="isMobileMenuOpen">
+    <div class="drawer-header">
+      <a class="logo" routerLink="/" aria-label="Go to home page" (click)="toggleMobileMenu()">
+        <img src="assets/images/logo/logo.png" alt="NES Logo" class="logo-img"
+          onerror="this.src='https://via.placeholder.com/150x50?text=NES+LOGO'">
+      </a>
+      <button class="close-btn" (click)="toggleMobileMenu()" aria-label="Close navigation menu">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+
+    <div class="drawer-search">
+      <div class="search-bar">
+        <i class="material-icons search-icon">search</i>
+        <input type="text" placeholder="Search for anything">
+      </div>
+    </div>
+
+    <ul class="drawer-links">
+      @for (item of menuData; track item.label) {
+        <li class="drawer-item" [class.has-children]="item.children && item.children.length > 0">
+          @if (item.label === 'Blogs') {
+            <a routerLink="/blogs" class="drawer-link" (click)="toggleMobileMenu()">
+              {{ item.label }}
+            </a>
+          } @else if (item.label === 'Contact Us') {
+            <a routerLink="/contact" class="drawer-link" (click)="toggleMobileMenu()">
+              {{ item.label }}
+            </a>
+          } @else if (item.children && item.children.length > 0) {
+            <div class="drawer-link-wrapper">
+              @if (item.label === 'All Courses') {
+                <a routerLink="/all-courses" class="drawer-link" (click)="toggleMobileMenu()">
+                  {{ item.label }}
+                </a>
+              } @else {
+                <a [href]="item.url" class="drawer-link">
+                  {{ item.label }}
+                </a>
+              }
+              <button class="submenu-toggle" (click)="toggleAllCourses()" [class.expanded]="isAllCoursesExpanded" aria-label="Expand submenu">
+                <i class="material-icons">expand_more</i>
+              </button>
+            </div>
+
+            @if (item.label === 'All Courses' && isAllCoursesExpanded) {
+              <ul class="drawer-submenu">
+                @for (cat of item.children; track cat.label) {
+                  <li class="submenu-item">
+                    <div class="category-toggle-row">
+                      <span class="category-label" (click)="toggleMobileCategory(cat.label)">
+                        <span class="material-icons cat-icon">
+                          @if (cat.label === 'CISCO') { router }
+                          @else if (cat.label === 'CHECKPOINT') { security }
+                          @else if (cat.label === 'MICROSOFT') { desktop_windows }
+                          @else if (cat.label === 'JUNIPER') { lan }
+                          @else if (cat.label === 'VMware') { layers }
+                          @else if (cat.label === 'COMPTIA') { school }
+                          @else if (cat.label === 'CLOUD') { cloud }
+                          @else if (cat.label === 'F5') { dns }
+                          @else if (cat.label === 'REDHAT-LINUX') { terminal }
+                          @else if (cat.label === 'PALO-ALTO') { shield }
+                          @else { star }
+                        </span>
+                        {{ cat.label }}
+                      </span>
+                      @if (cat.children && cat.children.length > 0) {
+                        <button class="cat-expand-btn" (click)="toggleMobileCategory(cat.label)" [class.expanded]="activeMobileCategory === cat.label" aria-label="Expand category">
+                          <i class="material-icons">expand_more</i>
+                        </button>
+                      }
+                    </div>
+
+                    @if (cat.children && cat.children.length > 0 && activeMobileCategory === cat.label) {
+                      <ul class="drawer-sub-submenu">
+                        @for (course of cat.children; track course.label) {
+                          <li>
+                            <a [routerLink]="['/course', toSlug(course.label)]"
+                               [queryParams]="{ title: course.label, source: course.url }"
+                               (click)="toggleMobileMenu()"
+                               class="course-sub-link">
+                              {{ course.label }}
+                            </a>
+                          </li>
+                        }
+                      </ul>
+                    }
+                  </li>
+                }
+              </ul>
+            } @else if (item.label !== 'All Courses' && isAllCoursesExpanded) {
+              <ul class="drawer-submenu">
+                @for (subItem of item.children; track subItem.label) {
+                  <li><a [href]="subItem.url" (click)="toggleMobileMenu()">{{ subItem.label }}</a></li>
+                }
+              </ul>
+            }
+          } @else {
+            <a [href]="item.url" class="drawer-link">
+              {{ item.label }}
+            </a>
+          }
+        </li>
+      }
+    </ul>
+  </div>
 </header>

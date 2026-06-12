@@ -5,6 +5,27 @@
 .blog-detail-tag { text-transform: uppercase; letter-spacing: .18em; font-size: .78rem; color: #0ea5e9; font-weight: 800; }
 .blog-detail-excerpt { color: #475569; font-size: 1.02rem; }
 .blog-detail-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: #475569; font-size: .95rem; }
-.blog-detail-content { color: #1f2937; line-height: 1.8; }
-.blog-detail-content p { margin-bottom: 1rem; }
+.blog-detail-content {
+  color: #1f2937;
+  line-height: 1.8;
+  word-break: break-word;
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    display: block;
+    overflow-x: auto;
+  }
+}
 .muted { color: #475569; }

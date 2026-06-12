@@ -80,6 +80,15 @@
   transform: translateY(-1px);
 }
 
+.landing-video__cta.cta--white {
+  background: #ffffff;
+  color: #111111;
+}
+
+.landing-video__cta.cta--white:hover {
+  background: #f0f0f0;
+}
+
 .hero {
   display: flex;
   align-items: center;

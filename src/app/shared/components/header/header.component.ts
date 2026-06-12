@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 interface MenuItem {
   label: string;
@@ -13,6 +14,20 @@ interface MenuItem {
 })
 export class HeaderComponent {
   activeCategory: string = 'CISCO';
+  isMobileMenuOpen: boolean = false;
+  isAllCoursesExpanded: boolean = false;
+  activeMobileCategory: string | null = null;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isMobileMenuOpen = false;
+        this.isAllCoursesExpanded = false;
+        this.activeMobileCategory = null;
+      }
+    });
+  }
+
 
   menuData: MenuItem[] = [
     {
@@ -183,5 +198,27 @@ export class HeaderComponent {
 
   toSlug(value: string): string {
     return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    // Prevent background scrolling when mobile menu is open
+    if (this.isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+
+  toggleAllCourses() {
+    this.isAllCoursesExpanded = !this.isAllCoursesExpanded;
+  }
+
+  toggleMobileCategory(label: string) {
+    if (this.activeMobileCategory === label) {
+      this.activeMobileCategory = null;
+    } else {
+      this.activeMobileCategory = label;
+    }
   }
 }
